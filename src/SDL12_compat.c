@@ -6505,12 +6505,8 @@ SetVideoModeImpl(int width, int height, int bpp, Uint32 flags12)
     }
 
     if ((bpp != 8) && (bpp != 16) && (bpp != 24) && (bpp != 32)) {
-        if (flags12 & SDL12_ANYFORMAT) {
-            bpp = max_bpp;
-        } else {
-            SDL20_SetError("Unsupported bits-per-pixel");
-            return NULL;
-        }
+        SDL20_SetError("Invalid bits per pixel (range is {8...32})");
+        return NULL;
     }
 
     appfmt = BPPToPixelFormat(bpp);
