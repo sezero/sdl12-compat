@@ -6565,6 +6565,8 @@ SetVideoModeImpl(int width, int height, int bpp, Uint32 flags12)
 
         if (recreate_window) {
             EndVidModeCreate();  /* rebuild the window if we can't resize it. */
+        } else if (!VideoSurface12->format || (VideoSurface12->format->BitsPerPixel != bpp)) {
+            FreeSurfaceContents(VideoSurface12);  /* hollow out the 1.2 surface if the fomat changes, even if the window survives...so palettes, etc, get recreated. */
         }
     }
 
