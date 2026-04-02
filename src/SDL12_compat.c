@@ -1475,6 +1475,9 @@ static QuirkEntryType quirks[] = {
     {"Jamestown-x86", "SDL12COMPAT_OPENGL_SCALING", "0"},
     {"Jamestown-amd64", "SDL12COMPAT_OPENGL_SCALING", "0"},
 
+    /* Sacred Gold manually frees SDL surface pixels */
+    {"sacred", "SDL_SURFACE_MALLOC", "1"},
+
 #else
     /* TODO: Add any quirks needed for this system. */
 
@@ -2934,6 +2937,9 @@ static void
 FreeSurfaceContents(SDL12_Surface *surface12)
 {
     if (surface12->surface20) {
+        if (surface12->pixels == NULL) {
+            surface12->surface20->pixels = NULL;
+        }
         SDL20_FreeSurface(surface12->surface20);
         surface12->surface20 = NULL;
     }
