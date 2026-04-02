@@ -104,9 +104,9 @@ static int ParseCommandLine(char *cmdline, char **argv)
 
 		/* Strip out \ from \" sequences */
 		if( argv && last_argc != argc ) {
-			UnEscapeQuotes( argv[last_argc] );	
+			UnEscapeQuotes( argv[last_argc] );
 		}
-		last_argc = argc;	
+		last_argc = argc;
 	}
 	if ( argv ) {
 		argv[argc] = NULL;
@@ -296,7 +296,7 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrev, LPSTR szCmdLine, int sw)
 	size_t nLen;
 
 	/* Start up DDHELP.EXE before opening any files, so DDHELP doesn't
-	   keep them open.  This is a hack.. hopefully it will be fixed 
+	   keep them open.  This is a hack.. hopefully it will be fixed
 	   someday.  DDHELP.EXE starts up the first time DDRAW.DLL is loaded.
 	 */
 	handle = LoadLibrary(TEXT("DDRAW.DLL"));
@@ -305,7 +305,7 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrev, LPSTR szCmdLine, int sw)
 	}
 
 	/* Check for stdio redirect settings and do the redirection */
-	if ((env_str = SDL_getenv("SDL_STDIO_REDIRECT"))) {
+	if ((env_str = SDL_getenv("SDL_STDIO_REDIRECT")) != NULL) {
 		if (SDL_atoi(env_str)) {
 			redirect_output();
 		}
